@@ -39,8 +39,7 @@ TestNumber NUMBER(10),
 CONSTRAINT OrderPK PRIMARY KEY(OrderDate,OrderTime,Results,PatientNumber,PhysicianID,TestName,TestNumber),
 CONSTRAINT PatientNFK FOREIGN KEY(PatientNumber) REFERENCES Patient(PatientNumber),
 CONSTRAINT PhysicianIDFK FOREIGN KEY(PhysicianID) REFERENCES Physician(IDNumber),
-CONSTRAINT TestNFK FOREIGN KEY(TestName) REFERENCES TheTest(TestName),
-CONSTRAINT TestNBRFK FOREIGN KEY(TestNumber) REFERENCES TheTest(TestNumber)
+CONSTRAINT TestPrimaryKeyFK FOREIGN KEY(TestName,TestNumber) REFERENCES TheTest(TestName,TestNumber)
 );
 
 --CREATE TABLE Result();//Skip this table for now, you may need to just put the result falue to order
