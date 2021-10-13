@@ -11,44 +11,42 @@ public class Orgeron_inserts{
         //write the insert instructions into a csv file
         
         //double slash because of the special formatting
-        String[] tablePaths = {"C:\\Users\\orger\\source\\repos\\dbms\\Nurse.csv",
-                               "C:\\Users\\orger\\source\\repos\\dbms\\Order.csv",
-                               "C:\\Users\\orger\\source\\repos\\dbms\\Bed.csv",
-                               "C:\\Users\\orger\\source\\repos\\dbms\\Physician.csv",
-                               "C:\\Users\\orger\\source\\repos\\dbms\\Test.csv",
-                               "C:\\Users\\orger\\source\\repos\\dbms\\TimeCard.csv"};//Could I use ./Nurse.csv instead for example?
+        String[] tablePaths = {".\\Physician.csv",
+                               ".\\Test.csv",
+                               ".\\Patient.csv",
+                               ".\\Order.csv",
+                               ".\\Nurse.csv",
+                               ".\\Bed.csv",
+                               ".\\TimeCard.csv"};//Could I use ./Timecard.csv instead for example?
         
         try{//somewheres in here, I need to output a string into an sql insertion file
-            for(int i = 0; i < tablePaths.length; i++){//basically loop through each of the csv files, generating an insert statement
-                Scanner s = new Scanner(new File(tablePaths[i]));//cvs file
-                s.useDelimiter("\n");//will this work?
+            for(int i = 0; i < tablePaths.length; i++){//basically loop through each of the csv files, generating insert statements for each file
+                Scanner s;
+                s = new Scanner(new File(tablePaths[i]));
+                s.useDelimiter(System.lineSeparator());//I had a lot of problems using just "\n" for the demimiter, so I had to use this instead
                 String fileName = fileName(new File(tablePaths[i]));//table name 
                 fileName = fileName.substring(0, fileName.length() -4);
-                while(s.hasNext()){
-                //get the
+                while(s.hasNext()){//Scan a particular csv file for values and input them into the sql file
+                    
                     String value = s.next();
-                  //  System.out.println(value);
-                   // value = value + "\n";
-               //    System.out.println(value);
-                    //value = value.substring(0, fileName.length() -1);
-    
-                    String sqlStatement = String.format("INSERT INTO %s VALUES (%s);\n", fileName, value);
-                  //  System.out.print(sqlStatement);
+                   
+                   String sqlStatement = String.format("INSERT INTO %S VALUES (%S);\n", fileName, value);
+                    
                     //after this, write this statement to the file
-                    File insertionSQL = new File("Orgeron_inserts.sql");
-                    FileWriter writer = new FileWriter(insertionSQL, true);
-                    writer.append(sqlStatement);
-                    writer.close();
-
+                   File insertionSQL = new File("Orgeron_inserts.sql");
+                   FileWriter writer = new FileWriter(insertionSQL, true);
+                   writer.append(sqlStatement);
+                   writer.close();
                 }
+                
                 if(s.hasNext() == false)
                     s.close();
-
-
+                
+                
             }
-           /* FileWriter w = new FileWriter("Orgeron_inserts.sql");
-            w.write("COMMIT;");
-            w.close();*/
+            FileWriter w = new FileWriter("Orgeron_inserts.sql", true);
+            w.append("COMMIT;");
+            w.close();
         }catch(FileNotFoundException e){
             e.printStackTrace();
         }
