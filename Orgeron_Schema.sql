@@ -29,7 +29,7 @@ REFERENCES Physician(IDNumber)
 );
 
 CREATE TABLE TheOrder(
-OrderDate  VARCHAR(9),
+OrderDate  VARCHAR(20),
 OrderTime    VARCHAR(6),
 Results VARCHAR(30),
 PatientNumber NUMBER(10),
