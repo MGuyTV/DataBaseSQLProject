@@ -1,0 +1,151 @@
+Output of Orgeron_Schema.sql
+Execute the file without the drop statements first:
+Table PHYSICIAN created.
+
+
+Table THETEST created.
+
+
+Table PATIENT created.
+
+
+Table THEORDER created.
+
+
+Table NURSE created.
+
+
+Table BED created.
+
+
+Table TIMECARD created.
+
+Executing the drop statements:
+Table TIMECARD dropped.
+
+
+Table BED dropped.
+
+
+Table NURSE dropped.
+
+
+Table THEORDER dropped.
+
+
+Table PATIENT dropped.
+
+
+Table THETEST dropped.
+
+
+Table PHYSICIAN dropped.
+
+The output of executing the Orgeron_inserts.sql file (note, make sure you run the schema file first before running this one):
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+1 row inserted.
+
+
+Commit complete.

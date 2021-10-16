@@ -12,9 +12,9 @@ public class Orgeron_inserts{
         
         //double slash because of the special formatting
         String[] tablePaths = {".\\Physician.csv",
-                               ".\\Test.csv",
+                               ".\\TheTest.csv",
                                ".\\Patient.csv",
-                               ".\\Order.csv",
+                               ".\\TheOrder.csv",
                                ".\\Nurse.csv",
                                ".\\Bed.csv",
                                ".\\TimeCard.csv"};//Could I use ./Timecard.csv instead for example?
