@@ -29,9 +29,9 @@ public class Orgeron_inserts{
                 while(s.hasNext()){//Scan a particular csv file for values and input them into the sql file
                     
                     String value = s.next();
-                   
-                   String sqlStatement = String.format("INSERT INTO %S VALUES (%S);\n", fileName, value);
-                    
+					
+                   String sqlStatement = String.format("INSERT INTO %s VALUES (%s);\n", fileName, value);
+                
                     //after this, write this statement to the file
                    File insertionSQL = new File("Orgeron_inserts.sql");
                    FileWriter writer = new FileWriter(insertionSQL, true);

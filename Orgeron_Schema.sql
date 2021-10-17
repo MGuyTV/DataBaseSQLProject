@@ -65,7 +65,7 @@ CONSTRAINT NNFK FOREIGN KEY(NurseNumber) REFERENCES Nurse(IDNumber)
 );
 
 CREATE TABLE Timecard(
-TimeDate VARCHAR(9),
+TimeDate VARCHAR(20),
 PhysicianID NUMBER(10),
 TimeHours NUMBER(10),
 CONSTRAINT CardPK PRIMARY KEY(TimeDate, PhysicianID),
