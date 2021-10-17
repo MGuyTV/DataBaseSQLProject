@@ -42,7 +42,6 @@ CONSTRAINT PhysicianIDFK FOREIGN KEY(PhysicianID) REFERENCES Physician(IDNumber)
 CONSTRAINT TestPrimaryKeyFK FOREIGN KEY(TestName,TestNumber) REFERENCES TheTest(TestName,TestNumber)
 );
 
---CREATE TABLE Result();//Skip this table for now, you may need to just put the result falue to order
 
 CREATE TABLE Nurse(
 IDNumber NUMBER(10),

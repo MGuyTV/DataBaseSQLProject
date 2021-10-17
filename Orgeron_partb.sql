@@ -1,12 +1,12 @@
 --1. Find all nurses (their names) with a salary greater than $70,000.
-SELECT *
+SELECT NurseName
 FROM nurse
-WHERE Salary > 70000
+WHERE Salary > 70000;
 
 
 
 --2. Find all the “general practice” (for the specialty) physicians and sort the query output by names (any direction).
-SELECT *
+SELECT PhysicianName
 FROM Physician
 WHERE Specialty = 'general practice'
 ORDER BY PhysicianName DESC;
@@ -30,14 +30,14 @@ WHERE specialty IS NULL;
 
 
 --5. Find the names of all nurses with a salary between $70,000 and $80,000.
-SELECT *
+SELECT NurseName
 FROM NURSE
-WHERE Salary BETWEEN 70000 AND 80000
+WHERE Salary BETWEEN 70000 AND 80000;
 
 
 
 --6. Find the names of the physicians who have a specialty containing “ology”.
-SELECT *
+SELECT PhysicianName
 FROM Physician
 WHERE Specialty LIKE '%ology';
 
