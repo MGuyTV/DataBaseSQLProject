@@ -44,11 +44,25 @@ WHERE Specialty LIKE '%ology';
 
 
 --7. Find the minimum and maximum salaries amongst all nurses. Use only one query.
-SELECT MIN(Salary) AND MAX(Salary)
-FROM Nurse;
+SELECT Salary 
+FROM Nurse
+WHERE Salary = (SELECT MAX(Salary) FROM Nurse)
+OR Salary = (SELECT MIN(Salary) FROM NURSE);
 
 
 
 --8. Find the average salary for all nurses.
 SELECT AVG(Salary)
 FROM Nurse; 
+
+--9. Find the name of the nurse that has the highest salary. Do not hardcode any salaries or other values.
+SELECT NurseName
+FROM NURSE
+WHERE Salary = (SELECT MAX(Salary) FROM Nurse);
+
+--10. Find the nurses with a salary less than the average overall salary for all nurses + 20% 
+--    (i.e., less than 1.2 * average salary). Do not hardcode any salaries or other values.
+SELECT NurseName
+FROM Nurse
+WHERE Salary < (SELECT 1.2 * AVG(Salary) FROM Nurse);
+
