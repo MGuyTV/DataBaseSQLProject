@@ -8,7 +8,7 @@ DROP TABLE Physician;
 
 CREATE TABLE Physician(
 IDNumber NUMBER(10),
-PatientName VARCHAR(30),
+PhysicianName VARCHAR(30),
 Specialty VARCHAR(30),
 CONSTRAINT PhysicianPK PRIMARY KEY(IDNumber)
 );
