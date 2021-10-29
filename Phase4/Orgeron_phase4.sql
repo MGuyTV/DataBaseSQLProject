@@ -77,7 +77,19 @@ WHERE Physician.IDNumber = Timecard.PhysicianID
 GROUP BY Specialty;
 --Retrieval Queries Requiring Regular Expressions (9 points, 3 pts each)
 --14. Find physicians whose specialty consists of exactly 2 words. For example, the query should return records for “General Practice”, but not “Oncology”.
-
---15. Assume patient name stores a first and last name (it is fine if you do not have these values). Find all patients whose name is properly capitalized (both first and last name start from an upper-case letter, rest of the name is lower-case). For example, the query should return results for “Ben Samuel” but not “ben Samuel”. 
-
+SELECT *
+FROM Physician
+WHERE REGEXP_LIKE(Specialty, '\s');
+--15. Assume patient name stores a first and last name (it is fine if you do not have these values). Find all patients whose name is properly capitalized 
+--(both first and last name start from an upper-case letter, rest of the name is lower-case). For example, the query should return results for “Ben Samuel” but not “ben Samuel”. 
+SELECT *
+FROM Nurse
+WHERE REGEXP_LIKE(NurseName, '[A-Z]{1}*\s[A-Z]{1}*');
 --16. Find all beds in room numbers that end in odd numbers. 
+SELECT *
+FROM Bed
+WHERE REGEXP_LIKE(BedNumber, '.[1, 3, 5, 7, 9]{1}');
+
+
+
+
