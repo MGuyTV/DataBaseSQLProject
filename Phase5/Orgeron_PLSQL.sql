@@ -10,7 +10,6 @@ BEGIN
     SELECT MIN(salary) INTO minimum FROM Nurse;
     SELECT MAX(salary) INTO maximum FROM Nurse;
 
-
     DBMS_OUTPUT.PUT_LINE(average);
     DBMS_OUTPUT.PUT_LINE(minimum);
     DBMS_OUTPUT.PUT_LINE(maximum);
@@ -23,23 +22,37 @@ END;
 DECLARE
     A_salary Nurse.salary%TYPE;
     CURSOR Salaries IS (SELECT salary FROM Nurse);
+    A_name Nurse.NurseName%TYPE;
+    CURSOR Names IS (SELECT NurseName FROM Nurse);
     average INTEGER;
 BEGIN
     SELECT AVG(salary) INTO average FROM Nurse;
     OPEN Salaries;
+    OPEN Names;
 
     LOOP
         FETCH Salaries INTO A_salary;
+        FETCH Names INTO A_Name;
         EXIT WHEN Salaries%NOTFOUND;
             IF A_salary = average THEN
                 DBMS_OUTPUT.PUT_LINE('Average');
-            ELSEIF A_salary < average THEN
+                DBMS_OUTPUT.PUT_LINE(A_salary);
+                DBMS_OUTPUT.PUT_LINE(A_Name);
+                DBMS_OUTPUT.PUT_LINE(chr(10));
+            ELSIF A_salary < average THEN
                 DBMS_OUTPUT.PUT_LINE('Below Average');
+                DBMS_OUTPUT.PUT_LINE(A_salary);
+                DBMS_OUTPUT.PUT_LINE(A_Name);
+                DBMS_OUTPUT.PUT_LINE(chr(10));
             ELSE
                 DBMS_OUTPUT.PUT_LINE('Above Average');
+                DBMS_OUTPUT.PUT_LINE(A_salary);
+                DBMS_OUTPUT.PUT_LINE(A_Name);
+                DBMS_OUTPUT.PUT_LINE(chr(10));
             END IF;
         END LOOP;
         CLOSE Salaries;
+        CLOSE Names;
 END;
 /
 
