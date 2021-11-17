@@ -32,10 +32,41 @@ WHERE Nurse.IDNumber = MyNumber;
 END;
 /
 
+--3. Write a trigger that will fire when the nurse ID for a bed record is changed (i.e., an UPDATE). 
+--This trigger will update the Nurse.BedsMonitored for both the previous Nurse and the new Nurse using
+--their respective ID’s. If the existing Nurse.BedsMonitored value for the new Nurse in the update is
+--equal to 3, then the nurse is too busy so your trigger will cancel the UPDATE and display an error
+--message stating that the Nurse is too busy (similar to the first trigger).
+CREATE OR REPLACE TRIGGER TriggerThree
+BEFORE UPDATE OF NurseNumber ON Bed
+FOR EACH ROW
+DECLARE
+OldNurseID INTEGER;
+NewNurseID INTEGER;
+NewNurseBedsMonitored INTEGER;
+BEGIN
+OldNurseID := :old.NurseNumber;
+NewNurseID := :new.NurseNumber;
+SELECT BedsMonitored INTO NewNurseBedsMonitored FROM Nurse WHERE IDNumber = NewNurseID;
+    IF NewNurseBedsMonitored = 3 THEN
+        raise_application_error(-20002, 'This nurse is too busy!');
+    ELSE
+        --increment BedsMonitored for the new Nurse, and decrement BedsMonitored for the old Nurse
+        UPDATE Nurse
+        SET BedsMonitored = BedsMonitored + 1
+        WHERE IDNumber = NewNurseID;
+        
+        UPDATE Nurse
+        SET BedsMonitored = BedsMonitored -1
+        WHERE IDNumber = OldNurseID;
+    END IF;
+END;
+/
 
 INSERT INTO Patient VALUES (40, 'Gandalf', 19);
 INSERT INTO Patient VALUES (41, 'Dumbledore', 20);
 INSERT INTO Patient VALUES (42, 'Palpatine', 21);
+INSERT INTO Patient VALUES (43, 'asdf', 22);
 
 
 --(BedNumber, Room, Unit, NurseID)
@@ -48,18 +79,13 @@ SET BedsMonitored = 2 WHERE Nurse.IDNumber = 52;
 INSERT INTO Bed VALUES(3, 105, 'ICU', 42, 52);
 UPDATE Nurse
 SET BedsMonitored = 3 WHERE Nurse.IDNumber = 52;
+INSERT INTO Bed VALUES(4, 104, 'icu', 43, 53);
+update nurse
+set bedsmonitored = 1 where nurse.idnumber = 53;
 
-Delete from bed where Bed.BedNumber = 1;
+Update Bed
+set NurseNumber = 53 Where Bed.BedNumber = 3;
 
 SELECT * FROM Nurse;
 SELECT * FROM Bed;
-
-
-
---3. Write a trigger that will fire when the nurse ID for a bed record is changed (i.e., an UPDATE). 
---This trigger will update the Nurse.BedsMonitored for both the previous Nurse and the new Nurse using
---their respective ID’s. If the existing Nurse.BedsMonitored value for the new Nurse in the update is
---equal to 3, then the nurse is too busy so your trigger will cancel the UPDATE and display an error
---message stating that the Nurse is too busy (similar to the first trigger).
-
 
