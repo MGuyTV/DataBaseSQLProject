@@ -44,15 +44,28 @@ public class PartA{
             String delete = "DELETE FROM TIMECARD";
             try{//Step 2, delete everything from the timecard table
                 state.executeUpdate(delete);
-                Scanner s = new Scanner(new File(".\\TimeCard.csv"));
             }catch(Exception e){
                 System.err.println("Delete failed: " + e);
             }
             //Step 3, read the CSV file in line by line
             try{
                 //Create prepared statement:
-                String insert = "INSERT INTO TIMECARD VAULES(?, ?, ?)";
+                String insert = "INSERT INTO TimeCard VALUES(?, ?, ?)";
                 PreparedStatement insertTimeCard = conn.prepareStatement(insert);
+                Scanner s = new Scanner(new File(".\\TimeCard.csv"));
+                s.useDelimiter(System.lineSeparator());//This should let us loop through this line by line
+                while(s.hasNext()){
+                    String str = s.next();
+                    String[] array = str.split(",");//We should have a row of the csv inserts delimited by ,'s'
+                    array[0] = "\"" + array[0] + "\"";//this should each string the quotations that they need.
+                    //Step 4, insert this data from this line into the database.
+                    insertTimeCard.setString(1, array[0]);
+                    insertTimeCard.setInt(2, Integer.valueOf(array[1]));//make sure the csv file does not
+                    insertTimeCard.setInt(3, Integer.valueOf(array[2]));//have any whitespaces or converting from string to int won't work
+                    System.out.println("hello" + array[1]);
+                    insertTimeCard.executeUpdate();
+                    
+                }
             }catch(FileNotFoundException e){
                 e.printStackTrace();
             }
@@ -60,7 +73,7 @@ public class PartA{
 			conn.close();
 		} 
 		catch(Exception e){
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}	
 }
