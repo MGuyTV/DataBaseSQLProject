@@ -40,17 +40,41 @@ vi.	Close your database connection.*/
             //iii. Using the result set from the query in the previous step and Java, print the 
             //following for your corresponding database:
             //a. Calculate the average salary for all nurses
-            result = state.executeQuery("SELECT AVG(Salary) FROM NURSE");//?
-            System.out.println(result.getInt(1));
+            int i = 0;
+            int sum = 0;
+            while(result.next()){
+                sum += result.getInt(3);
+                i++;
+            }
+            int average = sum / i;
+            System.out.println(average);
             //iv.	Issue the following two select queries for your corresponding database:
             //a.	SELECT * FROM Physician; and SELECT * FROM Timecard;
-            result = state.executeQuery("SELECT * FROM Physician");
             result = state.executeQuery("SELECT * FROM TimeCard");
+            int j = 0;
+            while(result.next()){
+                j++;//doing this will get the lenth of the array that will be made.
+            }
+            result = state.executeQuery("SELECT * FROM TimeCard");
+            int[] timeCardPhysID = new int[j];
+            for(int k = 0; result.next(); k++){
+                timeCardPhysID[k] = result.getInt(2);
+            }
+            result = state.executeQuery("SELECT * FROM Physician");
+            i = 0;
+            while(result.next()){
+                i++;
+            }
+            result = state.executeQuery("SELECT * FROM Physician");
             //v.	Using the result set from the queries in the previous step and Java, 
             //print the following for your corresponding database:
             //a.	Find the names of all physicians who have not submitted a timecard.
-            result = state.executeQuery("SELECT PhysicianName, Sum(Hours) FROM Physician LEFT OUTER JOIN TimeCard ON Physician.IDNumber = TimeCard.PhysicianID GROUP BY PhysicianName");
-
+            result = state.executeQuery("SELECT Physician.IDNumber,PhysicianName, COUNT(Physician.IDNumber) FROM Physician, TimeCard WHERE Physician.IDNumber != Timecard.PhysicianID GROUP BY Physician.IDNumber, PhysicianName HAVING COUNT(Physician.IDNumber) = (SELECT COUNT(Timecard.PhysicianID) FROM Timecard)");
+            while(result.next()){
+                
+                System.out.println(result.getInt(1) + " " + result.getString(2) + " " + result.getInt(3));
+            }
+            conn.close();
         }catch(Exception e){
             e.printStackTrace();
         }
