@@ -1,4 +1,7 @@
 import java.sql.*;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.Arrays;
 public class PartB{
 
     /*Part B. Manipulating Query Results (50 points)
@@ -63,16 +66,37 @@ vi.	Close your database connection.*/
             result = state.executeQuery("SELECT * FROM Physician");
             i = 0;
             while(result.next()){
-                i++;
+                i++;//this is to get the length of the two arrays that we are about to initialize
             }
+            int x = i;//save i for later
             result = state.executeQuery("SELECT * FROM Physician");
+            int[] physID = new int[i];
+            String[] names = new String[i];
+            for(int k = 0; result.next(); k++){
+                physID[k] = result.getInt(1);
+                names[k] = result.getString(2);
+            }
             //v.	Using the result set from the queries in the previous step and Java, 
             //print the following for your corresponding database:
             //a.	Find the names of all physicians who have not submitted a timecard.
-            result = state.executeQuery("SELECT Physician.IDNumber,PhysicianName, COUNT(Physician.IDNumber) FROM Physician, TimeCard WHERE Physician.IDNumber != Timecard.PhysicianID GROUP BY Physician.IDNumber, PhysicianName HAVING COUNT(Physician.IDNumber) = (SELECT COUNT(Timecard.PhysicianID) FROM Timecard)");
-            while(result.next()){
-                
-                System.out.println(result.getInt(1) + " " + result.getString(2) + " " + result.getInt(3));
+            //now that we did all of that, we just have to compare arrays to find the odd one out:
+            
+            Set<Integer> set1 = new TreeSet<>();
+            for(int a : timeCardPhysID)
+                set1.add(a);
+            Set<Integer> set2 = new TreeSet<>();
+            for(int b : physID)
+                set2.add(b);
+            Set<Integer> bothSets = new HashSet<Integer>(set1);
+            bothSets.addAll(set2);
+            Set<Integer> cross = new HashSet<Integer>(set1);
+            cross.retainAll(set2);
+            bothSets.removeAll(cross);
+            for(Integer n : bothSets){
+                for(i = 0; i < physID.length; i++){
+                    if(n == physID[i])
+                        System.out.println(names[i]);
+                }
             }
             conn.close();
         }catch(Exception e){
