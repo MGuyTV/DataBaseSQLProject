@@ -3,6 +3,6 @@
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "c:\\Users\\orger\\libs\\jdbc\\ojdbc8.jar"
+        "c:\\Users\\home_name\\libs\\jdbc\\ojdbc8.jar"
     ]
 }
