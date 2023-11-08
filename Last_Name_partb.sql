@@ -5,7 +5,7 @@ WHERE Salary > 70000;
 
 
 
---2. Find all the ìgeneral practiceî (for the specialty) physicians and sort the query output by names (any direction).
+--2. Find all the ‚Äúgeneral practice‚Äù (for the specialty) physicians and sort the query output by names (any direction).
 SELECT PhysicianName
 FROM Physician
 WHERE Specialty = 'general practice'
@@ -36,7 +36,7 @@ WHERE Salary BETWEEN 70000 AND 80000;
 
 
 
---6. Find the names of the physicians who have a specialty containing ìologyî.
+--6. Find the names of the physicians who have a specialty containing ‚Äúology‚Äù.
 SELECT PhysicianName
 FROM Physician
 WHERE Specialty LIKE '%ology';
