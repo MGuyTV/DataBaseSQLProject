@@ -41,7 +41,7 @@ Table THETEST dropped.
 
 Table PHYSICIAN dropped.
 
-The output of executing the Orgeron_inserts.sql file (note, make sure you run the schema file first before running this one):
+The output of executing the Last_Name_inserts.sql file (note, make sure you run the schema file first before running this one):
 
 1 row inserted.
 
