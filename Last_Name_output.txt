@@ -1,4 +1,4 @@
-Output of Orgeron_Schema.sql
+Output of Last_Name_Schema.sql
 Execute the file without the drop statements first:
 Table PHYSICIAN created.
 
