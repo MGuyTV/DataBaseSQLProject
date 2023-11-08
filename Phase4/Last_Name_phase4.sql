@@ -1,6 +1,6 @@
 --Mountain Valley Community Hospital
 --Intermediate Retrieval Queries (91 points, 7 pts each)
---1. Retrieve the names of all patients with referred by the physician with ID 1 and are assigned a bed in the ìIntensive Care Unitî unit.
+--1. Retrieve the names of all patients with referred by the physician with ID 1 and are assigned a bed in the ‚ÄúIntensive Care Unit‚Äù unit.
 --Note: I had to chane my units from numbers to strings
 SELECT *
 FROM Patient, Bed
@@ -15,7 +15,7 @@ FROM Bed, Patient, Nurse
 WHERE Bed.PatientNumber = Patient.PatientNumber--check
 AND PatientName = NurseName;
 
---3. Find the names of all nurses that are supervised by ìChris Summaî. Do not hardcode an SSN. (use darth vader instead)
+--3. Find the names of all nurses that are supervised by ‚ÄúChris Summa‚Äù. Do not hardcode an SSN. (use darth vader instead)
 SELECT NurseName
 FROM Nurse
 WHERE SupervisorID = (SELECT IDNumber FROM Nurse WHERE NurseName = 'Chris Summa');--check
@@ -42,7 +42,7 @@ SELECT Unit, AVG(Salary)
 FROM Bed, Nurse
 Where Bed.NurseNumber = Nurse.IDNumber--Check
 GROUP BY Unit;
---8. Retrieve the average of all hours worked by physicians with ìGeneral Practiceî specialty.
+--8. Retrieve the average of all hours worked by physicians with ‚ÄúGeneral Practice‚Äù specialty.
 SELECT AVG(Timehours)
 FROM Physician, TimeCard
 Where Timecard.PhysicianID = Physician.IDNumber--Check
@@ -63,7 +63,7 @@ WHERE Bed.NurseNumber = Nurse.IDNumber--check
 GROUP BY Nurse.IDNumber
 HAVING COUNT(Bed.NurseNumber) = 2;
 
---11. For each nurse whose salary is greater than $70K, list the nurseís name and the number of beds they monitor.
+--11. For each nurse whose salary is greater than $70K, list the nurse‚Äôs name and the number of beds they monitor.
 SELECT Nurse.IDNumber, Count(Nurse.IDNumber)
 FROM Nurse, Bed
 WHERE Salary > 70000
@@ -94,12 +94,12 @@ FROM Physician, Timecard
 WHERE Physician.IDNumber = Timecard.PhysicianID--This only works if a physician submitted a timecard
 GROUP BY Specialty;
 --Retrieval Queries Requiring Regular Expressions (9 points, 3 pts each)
---14. Find physicians whose specialty consists of exactly 2 words. For example, the query should return records for ìGeneral Practiceî, but not ìOncologyî.
+--14. Find physicians whose specialty consists of exactly 2 words. For example, the query should return records for ‚ÄúGeneral Practice‚Äù, but not ‚ÄúOncology‚Äù.
 SELECT *
 FROM Physician
 WHERE REGEXP_LIKE(Specialty, '\s');
 --15. Assume patient name stores a first and last name (it is fine if you do not have these values). Find all patients whose name is properly capitalized 
---(both first and last name start from an upper-case letter, rest of the name is lower-case). For example, the query should return results for ìBen Samuelî but not ìben Samuelî. 
+--(both first and last name start from an upper-case letter, rest of the name is lower-case). For example, the query should return results for ‚ÄúBen Samuel‚Äù but not ‚Äúben Samuel‚Äù. 
 SELECT *
 FROM Nurse
 WHERE REGEXP_LIKE(NurseName, '[A-Z]{1}*\s[A-Z]{1}*');
