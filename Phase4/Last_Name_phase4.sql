@@ -15,10 +15,10 @@ FROM Bed, Patient, Nurse
 WHERE Bed.PatientNumber = Patient.PatientNumber--check
 AND PatientName = NurseName;
 
---3. Find the names of all nurses that are supervised by “Chris Summa”. Do not hardcode an SSN. (use darth vader instead)
+--3. Find the names of all nurses that are supervised by “First_name_Last_Name”. Do not hardcode an SSN. (use darth vader instead)
 SELECT NurseName
 FROM Nurse
-WHERE SupervisorID = (SELECT IDNumber FROM Nurse WHERE NurseName = 'Chris Summa');--check
+WHERE SupervisorID = (SELECT IDNumber FROM Nurse WHERE NurseName = 'First_name_Last_Name');--check
 
 
 --4. For each physician, list their name, specialty, and total hours worked.
