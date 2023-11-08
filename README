@@ -1,2 +1,2 @@
-Note: Make sure if you run the java file that you delete or empty out the Orgeron_inserts.sql file first, because 
+Note: Make sure if you run the java file that you delete or empty out the Last_Name_inserts.sql file first, because 
 additional records will be added to the exising file.
